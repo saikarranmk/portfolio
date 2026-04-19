@@ -101,6 +101,70 @@
     @media (max-width: 980px){.hero,.contact-wrap,.project-grid,.edu-grid,.skills-grid,.stats-grid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.nav-links{width:100%}.hero{min-height:auto;padding-top:var(--space-8)}.avatar-stage{min-height:340px}}
     @media (max-width: 640px){body{cursor:auto}.cursor,.cursor-ring{display:none}.page-shell{padding-inline:var(--space-4)}.floating-card{padding:var(--space-5)}.summary-card,.timeline-card,.edu-card,.project-card,.contact-card,.skill-card,.stat-card{padding:var(--space-5)}.hero-actions .btn{width:100%}.nav-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.contact-card:hover,.project-card:hover{transform:none}}
     @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.cursor,.cursor-ring,#network{display:none}}
+    .edu-card,
+.project-card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)),
+    var(--color-surface);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 18px 48px rgba(0,0,0,.22);
+}
+
+.edu-card h3,
+.project-card h3 {
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.edu-card p,
+.project-card p {
+  max-width: 60ch;
+}
+
+.edu-score {
+  background: linear-gradient(135deg, rgba(79,216,230,.14), rgba(141,116,255,.10));
+  border: 1px solid rgba(79,216,230,.22);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.project-card .btn {
+  margin-top: auto;
+}
+
+.project-card {
+  min-height: 100%;
+}
+
+#education .project-grid {
+  align-items: stretch;
+}
+
+#education .project-card::after,
+#education .edu-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top right, rgba(79,216,230,.08), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(141,116,255,.08), transparent 30%);
+  opacity: .9;
+}
+
+#education .project-tags .tag {
+  background: rgba(255,255,255,.03);
+}
+
+#education .btn.btn-secondary {
+  border-color: rgba(79,216,230,.18);
+}
+
+#education .btn.btn-secondary:hover {
+  border-color: rgba(79,216,230,.4);
+  box-shadow: 0 10px 28px rgba(79,216,230,.14);
+  transform: translateY(-2px);
+}
   </style>
 </head>
 <body>
@@ -308,80 +372,119 @@
     </section>
 
     <section id="education" class="reveal slide-left">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Education & languages</span>
-          <h2>Academic track</h2>
-        </div>
-      </div>
-      <div class="edu-grid">
-        <article class="edu-card">
-          <p class="contact-label">Degree</p>
-          <h3>Master of Data Science</h3>
-          <p>Deakin University</p>
-          <span class="edu-score">GPA · 4.5 / 7.0</span>
-          <p>Expected completion noted for February 2026.</p>
-        </article>
-        <article class="edu-card">
-          <p class="contact-label">Degree</p>
-          <h3>PGP – Data Science in Business Analytics</h3>
-          <p>Deakin University</p>
-          <span class="edu-score">GPA · 3.7 / 5.0</span>
-          <p>Completed in July 2024.</p>
-        </article>
-      </div>
-      <div style="margin-top: var(--space-6); display:grid; gap: var(--space-4);">
-        <p class="contact-label">Certifications & proofs</p>
-        <div class="project-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4);">
-          <article class="project-card">
-            <h3>Power BI Certified</h3>
-            <p>Shown directly in the resume under tools and dashboards, highlighting validated dashboarding and reporting capability for analytics-focused roles.</p>
-            <div class="project-tags">
-              <span class="tag">Certification</span>
-              <span class="tag">Proof on resume</span>
-            </div>
-            <a class="btn btn-secondary" href="inmobi_saikarranmk.pdf" target="_blank" rel="noopener noreferrer">View Resume Proof</a>
-          </article>
-          <article class="project-card">
-            <h3>Master of Data Science (Global)</h3>
-            <p>Deakin transcript confirms course requirements completed on 26 Feb 2026 and eligibility for degree conferment at a forthcoming graduation ceremony.</p>
-            <div class="project-tags">
-              <span class="tag">Deakin University</span>
-              <span class="tag">Official Transcript</span>
-            </div>
-            <a class="btn btn-secondary" href="M-K-SAI-KARRAN_transcript_deakin.pdf" target="_blank" rel="noopener noreferrer">View Deakin Transcript</a>
-          </article>
-          <article class="project-card">
-            <h3>Distinction Subjects</h3>
-            <p>Academic proof of strong technical performance: Machine Learning (77, Distinction), Modern Data Science (71, Distinction), and Mathematics for Artificial Intelligence (75, Distinction).</p>
-            <div class="project-tags">
-              <span class="tag">SIG720</span>
-              <span class="tag">SIG742</span>
-              <span class="tag">SIG787</span>
-            </div>
-            <a class="btn btn-secondary" href="M-K-SAI-KARRAN_transcript_deakin.pdf" target="_blank" rel="noopener noreferrer">View Subject Proof</a>
-          </article>
-          <article class="project-card">
-            <h3>Recognised Prior Learning</h3>
-            <p>The transcript records credits granted on the basis of studies undertaken at Great Learning Education Pte, strengthening your academic foundation story.</p>
-            <div class="project-tags">
-              <span class="tag">Credit Granted</span>
-              <span class="tag">Great Learning</span>
-            </div>
-            <a class="btn btn-secondary" href="M-K-SAI-KARRAN_transcript_deakin.pdf" target="_blank" rel="noopener noreferrer">View Credit Proof</a>
-          </article>
-        </div>
-      </div>
-      <div style="margin-top: var(--space-6); display:grid; gap: var(--space-4);">
-        <p class="contact-label">Languages</p>
-        <div class="language-badges" aria-label="Language proficiency badges">
-          <span class="language-badge">English · Professional</span>
-          <span class="language-badge">Tamil · Native</span>
-          <span class="language-badge">Data storytelling · Fluent</span>
-        </div>
-      </div>
-    </section>
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Education & languages</span>
+      <h2>Academic track</h2>
+    </div>
+  </div>
 
+  <div class="edu-grid">
+    <article class="edu-card">
+      <p class="contact-label">Degree</p>
+      <h3>Master of Data Science (Global)</h3>
+      <p>Deakin University</p>
+      <span class="edu-score">Completed requirements · 26 Feb 2026</span>
+      <p>Course requirements completed on 26 February 2026, with eligibility for degree conferment at a forthcoming graduation ceremony.</p>
+      <a class="btn btn-secondary"
+         href="./M-K-SAI-KARRAN_transcript_deakin.pdf"
+         target="_blank"
+         rel="noopener noreferrer">
+        View Academic Transcript
+      </a>
+    </article>
+
+    <article class="edu-card">
+      <p class="contact-label">Academic performance</p>
+      <h3>Distinction-backed technical depth</h3>
+      <p>Deakin University</p>
+      <span class="edu-score">Transcript verified</span>
+      <p>Distinction results include Machine Learning (77), Modern Data Science (71), and Mathematics for Artificial Intelligence (75).</p>
+      <a class="btn btn-secondary"
+         href="./M-K-SAI-KARRAN_transcript_deakin.pdf"
+         target="_blank"
+         rel="noopener noreferrer">
+        View Subject Proof
+      </a>
+    </article>
+  </div>
+
+  <div style="margin-top: var(--space-6); display:grid; gap: var(--space-4);">
+    <p class="contact-label">Academic proof points</p>
+
+    <div class="project-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4);">
+      <article class="project-card">
+        <h3>Official Deakin Transcript</h3>
+        <p>The academic transcript confirms completion of the Master of Data Science (Global) course requirements on 26 February 2026.</p>
+        <div class="project-tags">
+          <span class="tag">Deakin University</span>
+          <span class="tag">Official Record</span>
+        </div>
+        <a class="btn btn-secondary"
+           href="./M-K-SAI-KARRAN_transcript_deakin.pdf"
+           target="_blank"
+           rel="noopener noreferrer">
+          Open Transcript
+        </a>
+      </article>
+
+      <article class="project-card">
+        <h3>Distinction Subjects</h3>
+        <p>Strong performance is evidenced through transcript-listed distinction grades in SIG720, SIG742, and SIG787.</p>
+        <div class="project-tags">
+          <span class="tag">SIG720</span>
+          <span class="tag">SIG742</span>
+          <span class="tag">SIG787</span>
+        </div>
+        <a class="btn btn-secondary"
+           href="./M-K-SAI-KARRAN_transcript_deakin.pdf"
+           target="_blank"
+           rel="noopener noreferrer">
+          Open Subject Proof
+        </a>
+      </article>
+
+      <article class="project-card">
+        <h3>Recognised Prior Learning</h3>
+        <p>The transcript records credits granted on the basis of studies undertaken at Great Learning Education Pte.</p>
+        <div class="project-tags">
+          <span class="tag">Credit Granted</span>
+          <span class="tag">Great Learning</span>
+        </div>
+        <a class="btn btn-secondary"
+           href="./M-K-SAI-KARRAN_transcript_deakin.pdf"
+           target="_blank"
+           rel="noopener noreferrer">
+          Open Credit Proof
+        </a>
+      </article>
+
+      <article class="project-card">
+        <h3>Degree Outcome</h3>
+        <p>The record states eligibility for the degree of Master of Data Science (Global) to be conferred at a forthcoming graduation ceremony.</p>
+        <div class="project-tags">
+          <span class="tag">Completion Confirmed</span>
+          <span class="tag">Conferment Eligible</span>
+        </div>
+        <a class="btn btn-secondary"
+           href="./M-K-SAI-KARRAN_transcript_deakin.pdf"
+           target="_blank"
+           rel="noopener noreferrer">
+          Open Completion Proof
+        </a>
+      </article>
+    </div>
+  </div>
+
+  <div style="margin-top: var(--space-6); display:grid; gap: var(--space-4);">
+    <p class="contact-label">Languages</p>
+    <div class="language-badges" aria-label="Language proficiency badges">
+      <span class="language-badge">English · Professional</span>
+      <span class="language-badge">Tamil · Native</span>
+      <span class="language-badge">Data storytelling · Fluent</span>
+    </div>
+  </div>
+</section>
     <section id="contact" class="reveal">
       <div class="section-head">
         <div>
