@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saikarran MK | Animated Resume Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.75rem, 1rem + 4vw, 5.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem;
+      --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem;
+      --radius-sm: 0.5rem; --radius-md: 0.85rem; --radius-lg: 1.25rem; --radius-xl: 1.75rem; --radius-full: 999px;
+      --color-bg: #f7f6f2; --color-surface: #fbfbf9; --color-surface-2: #f1eee8; --color-border: rgba(40,37,29,.12);
+      --color-text: #1b1a18; --color-text-muted: #5e5b55; --color-text-faint: #9b988f; --color-primary: #0aa7b5;
+      --color-secondary: #7c5cff; --color-accent: #7ef0d2; --color-card-glow: rgba(10,167,181,.18);
+      --shadow-sm: 0 2px 12px rgba(22, 22, 20, 0.08); --shadow-md: 0 16px 40px rgba(22, 22, 20, 0.12); --shadow-lg: 0 24px 60px rgba(22,22,20,.18);
+      --font-body: 'Satoshi', Inter, sans-serif; --font-display: 'Cabinet Grotesk', 'Satoshi', sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #0a1015; --color-surface: rgba(18, 26, 34, 0.72); --color-surface-2: rgba(16, 23, 30, 0.95); --color-border: rgba(165, 189, 210, 0.14);
+      --color-text: #eff7ff; --color-text-muted: #a9bfd1; --color-text-faint: #6e8598; --color-primary: #4fd8e6;
+      --color-secondary: #8d74ff; --color-accent: #86ffd7; --color-card-glow: rgba(79, 216, 230, 0.18);
+      --shadow-sm: 0 2px 18px rgba(0, 0, 0, 0.18); --shadow-md: 0 18px 48px rgba(0, 0, 0, 0.28); --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.42);
+    }
+    *,:before,:after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth} body{font-family:var(--font-body);font-size:var(--text-base);background:radial-gradient(circle at top right, rgba(79,216,230,.08), transparent 28%), radial-gradient(circle at bottom left, rgba(141,116,255,.1), transparent 30%), var(--color-bg);color:var(--color-text);min-height:100vh;overflow-x:hidden;cursor:none}
+    a{color:inherit;text-decoration:none} img,canvas,svg{display:block;max-width:100%} button{font:inherit}
+    .skip-link{position:absolute;left:var(--space-4);top:-100px;background:var(--color-primary);color:#00161b;padding:var(--space-3) var(--space-4);border-radius:var(--radius-full);z-index:10001}.skip-link:focus{top:var(--space-4)}
+    #loader{position:fixed;inset:0;display:grid;place-items:center;background:#05090d;z-index:9999;transition:opacity .8s ease, visibility .8s ease}
+    #loader.hidden{opacity:0;visibility:hidden}.loader-core{width:92px;height:92px;border-radius:50%;border:2px solid rgba(255,255,255,.08);border-top-color:var(--color-primary);animation:spin 1s linear infinite;position:relative;box-shadow:0 0 40px rgba(79,216,230,.18)}
+    .loader-core::before,.loader-core::after{content:"";position:absolute;inset:10px;border-radius:50%;border:2px solid transparent;border-right-color:rgba(134,255,215,.6);animation:spinReverse 1.5s linear infinite}.loader-core::after{inset:24px;border-right-color:rgba(141,116,255,.65);animation-duration:2.1s}
+    .loader-text{margin-top:var(--space-6);letter-spacing:.4em;text-transform:uppercase;font-size:var(--text-xs);color:var(--color-text-muted)}
+    #network{position:fixed;inset:0;z-index:-2}
+    .noise{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.03) 0.7px, transparent 0.7px);background-size:18px 18px;opacity:.25;z-index:-1}
+    .cursor,.cursor-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:10000;border-radius:50%;transform:translate(-50%,-50%)}
+    .cursor{width:10px;height:10px;background:var(--color-accent);box-shadow:0 0 20px rgba(134,255,215,.9),0 0 40px rgba(79,216,230,.35)}
+    .cursor-ring{width:34px;height:34px;border:1px solid rgba(134,255,215,.65);transition:transform .14s ease, width .2s ease, height .2s ease, border-color .2s ease;box-shadow:0 0 22px rgba(79,216,230,.25)}
+    .page-shell{position:relative;max-width:1220px;margin:0 auto;padding:var(--space-6) var(--space-4) var(--space-20)}
+    header{position:sticky;top:0;z-index:1000;backdrop-filter:blur(18px);background:color-mix(in srgb, var(--color-bg) 65%, transparent);border-bottom:1px solid var(--color-border)}
+    .nav{max-width:1220px;margin:0 auto;padding:var(--space-4);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)}
+    .brand{display:flex;align-items:center;gap:var(--space-3);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:var(--text-sm)}
+    .brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg, rgba(79,216,230,.22), rgba(141,116,255,.18));border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px rgba(79,216,230,.12)}
+    .nav-links{display:flex;flex-wrap:wrap;gap:var(--space-2)} .nav-links a,.theme-toggle{padding:0.85rem 1rem;border-radius:var(--radius-full);font-size:var(--text-sm);color:var(--color-text-muted);border:1px solid transparent;min-width:44px;min-height:44px;display:grid;place-items:center}
+    .nav-links a:hover,.theme-toggle:hover{color:var(--color-text);border-color:var(--color-border);background:rgba(255,255,255,.04)}
+    section{padding-block:clamp(var(--space-10), 8vw, var(--space-20));content-visibility:auto}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:var(--space-6);margin-bottom:var(--space-8);flex-wrap:wrap}
+    .eyebrow{display:inline-flex;align-items:center;gap:.55rem;padding:.5rem .85rem;border-radius:var(--radius-full);font-size:var(--text-xs);letter-spacing:.2em;text-transform:uppercase;border:1px solid var(--color-border);color:var(--color-text-muted);background:rgba(255,255,255,.03)}
+    h1,h2,h3{font-family:var(--font-display)} h1{font-size:var(--text-3xl);line-height:.95;letter-spacing:-.04em} h2{font-size:var(--text-2xl);line-height:1} h3{font-size:var(--text-lg)}
+    p{color:var(--color-text-muted);max-width:68ch}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-8);align-items:center;min-height:calc(100vh - 96px)}
+    .hero-copy{display:grid;gap:var(--space-6)}
+    .shimmer-name{background:linear-gradient(90deg, var(--color-text) 0%, var(--color-primary) 35%, var(--color-accent) 50%, var(--color-secondary) 72%, var(--color-text) 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite}
+    .hero-actions,.quick-meta,.language-badges,.contact-grid,.edu-grid,.project-grid,.stats-grid,.skills-grid{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 1.2rem;border-radius:var(--radius-full);border:1px solid var(--color-border);min-height:48px;font-weight:700}
+    .btn-primary{background:linear-gradient(135deg, rgba(79,216,230,.9), rgba(134,255,215,.88));color:#032126;box-shadow:0 14px 32px rgba(79,216,230,.22)} .btn-secondary{background:rgba(255,255,255,.03)}
+    .meta-pill,.language-badge{padding:.82rem 1rem;border-radius:var(--radius-full);border:1px solid var(--color-border);background:rgba(255,255,255,.035);font-size:var(--text-sm);color:var(--color-text);position:relative;overflow:hidden}
+    .language-badge{animation:floatBadge 4.6s ease-in-out infinite}.language-badge:nth-child(2){animation-delay:.6s}.language-badge:nth-child(3){animation-delay:1.2s}
+    .hero-card-wrap{perspective:1400px;display:grid;place-items:center}
+    .floating-card{width:min(100%, 430px);padding:var(--space-6);border-radius:28px;background:linear-gradient(160deg, rgba(16,25,34,.9), rgba(12,18,24,.7));border:1px solid rgba(255,255,255,.09);box-shadow:var(--shadow-lg), 0 0 0 1px rgba(79,216,230,.05) inset;position:relative;transform-style:preserve-3d;animation:float3d 8s ease-in-out infinite}
+    .floating-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg, rgba(79,216,230,.6), rgba(141,116,255,.32), transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-6)} .status-dot{width:11px;height:11px;border-radius:50%;background:var(--color-accent);box-shadow:0 0 18px rgba(134,255,215,.85)}
+    .score-board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-6)}
+    .score-tile,.stat-card,.skill-card,.timeline-card,.edu-card,.project-card,.contact-card,.summary-card,.marquee-track span{background:var(--color-surface);border:1px solid var(--color-border);backdrop-filter:blur(18px)}
+    .score-tile{padding:var(--space-4);border-radius:var(--radius-lg)} .score-tile strong{font-size:var(--text-xl);display:block}
+    .summary-card,.timeline-card,.edu-card,.project-card,.contact-card,.skill-card,.stat-card{border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+    .summary-card::after,.timeline-card::after,.edu-card::after,.contact-card::after{content:"";position:absolute;inset:auto -20% -65% auto;width:180px;height:180px;background:radial-gradient(circle, rgba(79,216,230,.14), transparent 70%);pointer-events:none}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4)}
+    .stat-card strong{font-size:var(--text-xl);display:block;margin-bottom:.25rem}
+    .timeline{display:grid;gap:var(--space-5)} .timeline-card{display:grid;gap:var(--space-4)} .timeline-meta{display:flex;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;color:var(--color-text-muted);font-size:var(--text-sm)}
+    .timeline-card ul{display:grid;gap:var(--space-3);padding-left:1rem} .timeline-card li{color:var(--color-text-muted)}
+    .skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)} .skill-card{display:grid;gap:var(--space-4)} .skill-head{display:flex;justify-content:space-between;gap:var(--space-3);align-items:center}
+    .skill-bar{height:12px;border-radius:var(--radius-full);background:rgba(255,255,255,.06);overflow:hidden;border:1px solid rgba(255,255,255,.04)} .skill-fill{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg, var(--color-primary), var(--color-accent));box-shadow:0 0 24px rgba(79,216,230,.3);transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+    .project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5)}
+    .project-card{min-height:100%;display:grid;gap:var(--space-4);transition:transform .35s ease, box-shadow .35s ease,border-color .35s ease}.project-card::before{content:"";position:absolute;left:-120%;top:0;width:70%;height:4px;background:linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), transparent);transition:left .55s ease}.project-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-md);border-color:rgba(79,216,230,.28)}.project-card:hover::before{left:130%}
+    .project-tags{display:flex;flex-wrap:wrap;gap:var(--space-2)} .tag{padding:.45rem .75rem;border-radius:var(--radius-full);font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--color-border);color:var(--color-text-muted)}
+    .edu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5)} .edu-card{display:grid;gap:var(--space-4)} .edu-score{display:inline-flex;align-items:center;gap:.6rem;font-size:var(--text-sm);padding:.6rem .85rem;border-radius:var(--radius-full);background:rgba(79,216,230,.1);color:var(--color-accent);width:max-content}
+    .marquee{overflow:hidden;border-radius:var(--radius-xl);border:1px solid var(--color-border);background:rgba(255,255,255,.025)} .marquee-track{display:flex;gap:var(--space-4);padding:var(--space-4);width:max-content;animation:marquee 26s linear infinite}.marquee-track span{padding:1rem 1.35rem;border-radius:var(--radius-full);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:var(--text-xs);white-space:nowrap}
+    .contact-wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:var(--space-6);align-items:stretch}
+    .contact-list{display:grid;gap:var(--space-4)} .contact-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease}.contact-card:hover{transform:translateX(12px);border-color:rgba(79,216,230,.26);box-shadow:var(--shadow-md)}
+    .contact-label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-faint)}
+    .avatar-stage{position:relative;min-height:420px;display:grid;place-items:center;border-radius:32px;background:linear-gradient(180deg, rgba(79,216,230,.08), rgba(141,116,255,.05));border:1px solid var(--color-border);overflow:hidden}
+    .avatar-core{position:relative;width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, rgba(134,255,215,.95), rgba(79,216,230,.78) 45%, rgba(141,116,255,.78));color:#072029;font-family:var(--font-display);font-size:3rem;font-weight:800;letter-spacing:.08em;box-shadow:0 0 50px rgba(79,216,230,.35);animation:pulseCore 3.8s ease-in-out infinite}
+    .ripple,.ripple::before,.ripple::after{position:absolute;border-radius:50%;border:1px solid rgba(134,255,215,.24);inset:50%;transform:translate(-50%,-50%)}
+    .ripple{width:220px;height:220px;animation:ripple 4s ease-out infinite}.ripple::before,.ripple::after{content:"";width:100%;height:100%}.ripple::before{animation:ripple 4s ease-out 1.3s infinite}.ripple::after{animation:ripple 4s ease-out 2.6s infinite}
+    .avatar-points{position:absolute;inset:0}.avatar-points span{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--color-primary);box-shadow:0 0 18px rgba(79,216,230,.9)} .avatar-points span:nth-child(1){top:18%;left:22%;animation:orbitFloat 7s ease-in-out infinite}.avatar-points span:nth-child(2){top:28%;right:18%;animation:orbitFloat 6s ease-in-out 1s infinite}.avatar-points span:nth-child(3){bottom:20%;left:25%;animation:orbitFloat 8s ease-in-out .8s infinite}.avatar-points span:nth-child(4){bottom:24%;right:22%;animation:orbitFloat 7.5s ease-in-out 1.6s infinite}
+    .reveal{opacity:0;transform:translateY(42px);transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1)} .reveal.visible{opacity:1;transform:none} .slide-left{transform:translateX(-48px)} .slide-right{transform:translateX(48px)}
+    footer{padding:var(--space-8) var(--space-4) var(--space-12);text-align:center;color:var(--color-text-faint)}
+    @keyframes shimmer{0%{background-position:0% center}100%{background-position:220% center}} @keyframes spin{to{transform:rotate(360deg)}} @keyframes spinReverse{to{transform:rotate(-360deg)}}
+    @keyframes float3d{0%,100%{transform:rotateX(10deg) rotateY(-12deg) translateY(0)}25%{transform:rotateX(4deg) rotateY(10deg) translateY(-12px)}50%{transform:rotateX(-8deg) rotateY(4deg) translateY(4px)}75%{transform:rotateX(8deg) rotateY(-6deg) translateY(-8px)}}
+    @keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}} @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}} @keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+    @keyframes ripple{0%{width:180px;height:180px;opacity:.8}100%{width:430px;height:430px;opacity:0}} @keyframes orbitFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(8px,-14px,0)}}
+    @media (max-width: 980px){.hero,.contact-wrap,.project-grid,.edu-grid,.skills-grid,.stats-grid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.nav-links{width:100%}.hero{min-height:auto;padding-top:var(--space-8)}.avatar-stage{min-height:340px}}
+    @media (max-width: 640px){body{cursor:auto}.cursor,.cursor-ring{display:none}.page-shell{padding-inline:var(--space-4)}.floating-card{padding:var(--space-5)}.summary-card,.timeline-card,.edu-card,.project-card,.contact-card,.skill-card,.stat-card{padding:var(--space-5)}.hero-actions .btn{width:100%}.nav-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.contact-card:hover,.project-card:hover{transform:none}}
+    @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.cursor,.cursor-ring,#network{display:none}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="loader" aria-hidden="true">
+    <div>
+      <div class="loader-core"></div>
+      <div class="loader-text">Initializing portfolio</div>
+    </div>
+  </div>
+  <canvas id="network"></canvas>
+  <div class="noise"></div>
+  <div class="cursor"></div>
+  <div class="cursor-ring"></div>
+
+  <header>
+    <nav class="nav" aria-label="Primary navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">SM</div>
+        <span>Saikarran MK</span>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">◐</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section class="hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow">Global Business Operations & Analytics</span>
+        <div>
+          <p style="margin-bottom: var(--space-3); color: var(--color-text-faint);">Hello, I’m</p>
+          <h1 class="shimmer-name">Saikarran MK</h1>
+        </div>
+        <p>Performance-driven GBS Analyst with 3+ years of experience in campaign management, ad operations, strategic data execution, Python automation, SQL reporting, and Power BI storytelling.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Hire Me</a>
+          <a class="btn btn-secondary" href="mailto:karranmksai@gmail.com">Email Me</a>
+        </div>
+        <div class="quick-meta">
+          <span class="meta-pill">Chennai, India</span>
+          <span class="meta-pill">Available for analytics roles</span>
+          <span class="meta-pill">Python · SQL · Power BI</span>
+        </div>
+      </div>
+      <div class="hero-card-wrap slide-right reveal">
+        <article class="floating-card" aria-label="Profile highlights">
+          <div class="card-top">
+            <div>
+              <p class="contact-label">Operational backbone</p>
+              <h3>Campaign analytics with data storytelling</h3>
+            </div>
+            <span class="status-dot" aria-hidden="true"></span>
+          </div>
+          <p>Experienced in campaign setup, tracker testing, dashboard reporting, stakeholder coordination, and process automation across business operations workflows.</p>
+          <div class="score-board">
+            <div class="score-tile"><span class="contact-label">Experience</span><strong>3+</strong><p>Years in GBS and BI</p></div>
+            <div class="score-tile"><span class="contact-label">Requests</span><strong>3000+</strong><p>Monthly SLA-managed operations</p></div>
+            <div class="score-tile"><span class="contact-label">Impact</span><strong>$200K</strong><p>Optimization opportunity identified</p></div>
+            <div class="score-tile"><span class="contact-label">Automation</span><strong>15 hrs</strong><p>Weekly reporting time reduced</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="reveal slide-left">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Profile</span>
+          <h2>About me</h2>
+        </div>
+      </div>
+      <article class="summary-card">
+        <p>Expert in translating complex datasets into clear data stories and actionable narratives, with hands-on experience across campaign delivery, descriptive and diagnostic analysis, Salesforce reporting, tracker testing, and cross-functional issue resolution with Sales, Product, Finance, and Account Management teams.</p>
+      </article>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Highlights</span>
+          <h2>Measured impact</h2>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card"><strong>100%</strong><p>SLA and TAT adherence for campaign operations.</p></article>
+        <article class="stat-card"><strong>60%</strong><p>Increase in actionable lead identification via dashboards.</p></article>
+        <article class="stat-card"><strong>30%</strong><p>Reduction in discrepancy resolution time.</p></article>
+        <article class="stat-card"><strong>25%</strong><p>Reduction in onboarding time for new team members.</p></article>
+      </div>
+    </section>
+
+    <section id="experience" class="reveal slide-right">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Experience</span>
+          <h2>Career journey</h2>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="timeline-card">
+          <div class="timeline-meta">
+            <div>
+              <h3>Sr. Analyst – Global Business Operations & Analytics</h3>
+              <p>AstraZeneca India · Chennai, India</p>
+            </div>
+            <span>June 2023 – Present</span>
+          </div>
+          <ul>
+            <li>Executed end-to-end campaign operations and tracker testing for 3,000+ monthly requests using a custom Python automation framework.</li>
+            <li>Consolidated internal SQL and third-party attribution data into stakeholder-ready performance stories and reporting views.</li>
+            <li>Built a Salesforce-driven automated reporting engine that reduced manual delivery reporting by 15 hours per week.</li>
+            <li>Collaborated with Sales, Account Management, and Finance teams to resolve delivery issues and maintain zero-deficiency audit outcomes.</li>
+          </ul>
+        </article>
+        <article class="timeline-card">
+          <div class="timeline-meta">
+            <div>
+              <h3>Data Analyst – Business Intelligence & Campaign Management</h3>
+              <p>Positive Integers Consulting Ltd · Chennai, India</p>
+            </div>
+            <span>June 2022 – April 2023</span>
+          </div>
+          <ul>
+            <li>Authored internal procedures, policies, and tutorials that cut onboarding time by 25% for new team members.</li>
+            <li>Created interactive Power BI dashboards that improved actionable lead identification by 60% for non-technical stakeholders.</li>
+            <li>Managed data flows and live performance tracking to reduce discrepancy resolution time by 30%.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal slide-left">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Skills</span>
+          <h2>Technical core</h2>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-card">
+          <div class="skill-head"><h3>Python & Analytics</h3><span>92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div>
+          <p>Pandas, Scikit-learn, descriptive analysis, diagnostic workflows, predictive behaviors, anomaly detection.</p>
+        </article>
+        <article class="skill-card">
+          <div class="skill-head"><h3>SQL & Data Extraction</h3><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+          <p>Advanced SQL, internal database extraction, consolidation, campaign performance reporting.</p>
+        </article>
+        <article class="skill-card">
+          <div class="skill-head"><h3>Power BI & Dashboards</h3><span>88%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div>
+          <p>Interactive dashboard design, stakeholder views, KPI reporting, storytelling for non-technical audiences.</p>
+        </article>
+        <article class="skill-card">
+          <div class="skill-head"><h3>Campaign Operations</h3><span>94%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="94%"></div></div>
+          <p>End-to-end campaign setup, tracker testing, screenshot documentation, SLA-aligned operational execution.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Companies</span>
+          <h2>Experience bands</h2>
+        </div>
+      </div>
+      <div class="marquee" aria-label="Companies and platforms mentioned">
+        <div class="marquee-track">
+          <span>AstraZeneca India</span><span>Positive Integers Consulting Ltd</span><span>Salesforce CRM</span><span>Power BI</span><span>Tableau</span><span>Python Automation</span><span>SQL Reporting</span>
+          <span>AstraZeneca India</span><span>Positive Integers Consulting Ltd</span><span>Salesforce CRM</span><span>Power BI</span><span>Tableau</span><span>Python Automation</span><span>SQL Reporting</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal slide-right">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Projects</span>
+          <h2>Strategic initiatives</h2>
+        </div>
+      </div>
+      <div class="project-grid">
+        <article class="project-card">
+          <h3>AI-Driven Data Storytelling & Insight Generation</h3>
+          <p>Leveraged Python, SQL, and attribution data to uncover strategic business goals and identify $200,000 in prospective growth opportunities through predictive simulations.</p>
+          <div class="project-tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Attribution Data</span><span class="tag">Apr 2024 – May 2024</span></div>
+        </article>
+        <article class="project-card">
+          <h3>Interactive Dashboard Automation</h3>
+          <p>Designed internal performance and delivery reports from scratch in Power BI, creating a 360-degree stakeholder view and supporting campaign execution tracking.</p>
+          <div class="project-tags"><span class="tag">Power BI</span><span class="tag">UI/UX Wireframes</span><span class="tag">Aug 2022 – Jan 2023</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="education" class="reveal slide-left">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Education & languages</span>
+          <h2>Academic track</h2>
+        </div>
+      </div>
+      <div class="edu-grid">
+        <article class="edu-card">
+          <p class="contact-label">Degree</p>
+          <h3>Master of Data Science</h3>
+          <p>Deakin University</p>
+          <span class="edu-score">GPA · 4.5 / 7.0</span>
+          <p>Expected completion noted for February 2026.</p>
+        </article>
+        <article class="edu-card">
+          <p class="contact-label">Degree</p>
+          <h3>PGP – Data Science in Business Analytics</h3>
+          <p>Deakin University</p>
+          <span class="edu-score">GPA · 3.7 / 5.0</span>
+          <p>Completed in July 2024.</p>
+        </article>
+      </div>
+      <div style="margin-top: var(--space-6); display:grid; gap: var(--space-4);">
+        <p class="contact-label">Certifications & proofs</p>
+        <div class="project-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4);">
+          <article class="project-card">
+            <h3>Power BI Certified</h3>
+            <p>Shown directly in the resume under tools and dashboards, highlighting validated dashboarding and reporting capability for analytics-focused roles.</p>
+            <div class="project-tags">
+              <span class="tag">Certification</span>
+              <span class="tag">Proof on resume</span>
+            </div>
+            <a class="btn btn-secondary" href="inmobi_saikarranmk.pdf" target="_blank" rel="noopener noreferrer">View Resume Proof</a>
+          </article>
+          <article class="project-card">
+            <h3>Master of Data Science (Global)</h3>
+            <p>Deakin transcript confirms course requirements completed on 26 Feb 2026 and eligibility for degree conferment at a forthcoming graduation ceremony.</p>
+            <div class="project-tags">
+              <span class="tag">Deakin University</span>
+              <span class="tag">Official Transcript</span>
+            </div>
+            <a class="btn btn-secondary" href="M-K-SAI-KARRAN_transcript_deakin.pdf" target="_blank" rel="noopener noreferrer">View Deakin Transcript</a>
+          </article>
+          <article class="project-card">
+            <h3>Distinction Subjects</h3>
+            <p>Academic proof of strong technical performance: Machine Learning (77, Distinction), Modern Data Science (71, Distinction), and Mathematics for Artificial Intelligence (75, Distinction).</p>
+            <div class="project-tags">
+              <span class="tag">SIG720</span>
+              <span class="tag">SIG742</span>
+              <span class="tag">SIG787</span>
+            </div>
+            <a class="btn btn-secondary" href="M-K-SAI-KARRAN_transcript_deakin.pdf" target="_blank" rel="noopener noreferrer">View Subject Proof</a>
+          </article>
+          <article class="project-card">
+            <h3>Recognised Prior Learning</h3>
+            <p>The transcript records credits granted on the basis of studies undertaken at Great Learning Education Pte, strengthening your academic foundation story.</p>
+            <div class="project-tags">
+              <span class="tag">Credit Granted</span>
+              <span class="tag">Great Learning</span>
+            </div>
+            <a class="btn btn-secondary" href="M-K-SAI-KARRAN_transcript_deakin.pdf" target="_blank" rel="noopener noreferrer">View Credit Proof</a>
+          </article>
+        </div>
+      </div>
+      <div style="margin-top: var(--space-6); display:grid; gap: var(--space-4);">
+        <p class="contact-label">Languages</p>
+        <div class="language-badges" aria-label="Language proficiency badges">
+          <span class="language-badge">English · Professional</span>
+          <span class="language-badge">Tamil · Native</span>
+          <span class="language-badge">Data storytelling · Fluent</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2>Let’s connect</h2>
+        </div>
+      </div>
+      <div class="contact-wrap">
+        <div class="contact-list slide-left reveal">
+          <article class="contact-card">
+            <div>
+              <p class="contact-label">Email</p>
+              <h3><a href="mailto:karranmksai@gmail.com">karranmksai@gmail.com</a></h3>
+            </div>
+            <span>↗</span>
+          </article>
+          <article class="contact-card">
+            <div>
+              <p class="contact-label">Phone</p>
+              <h3><a href="tel:+917604877894">+91 76048 77894</a></h3>
+            </div>
+            <span>↗</span>
+          </article>
+          <article class="contact-card">
+            <div>
+              <p class="contact-label">Location</p>
+              <h3>Chennai, India</h3>
+            </div>
+            <span>⌖</span>
+          </article>
+          <article class="contact-card">
+            <div>
+              <p class="contact-label">Availability</p>
+              <h3>Open for analytics opportunities</h3>
+            </div>
+            <span>●</span>
+          </article>
+        </div>
+        <div class="avatar-stage slide-right reveal" aria-hidden="true">
+          <div class="ripple"></div>
+          <div class="avatar-core">SM</div>
+          <div class="avatar-points"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Crafted as a single-file responsive resume portfolio with pure HTML, CSS, and JavaScript.
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector('[data-theme-toggle]');
+    let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    root.setAttribute('data-theme', theme);
+    const setToggleLabel = () => toggle.textContent = root.getAttribute('data-theme') === 'dark' ? '☀' : '☾';
+    setToggleLabel();
+    toggle.addEventListener('click', () => {
+      theme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      setToggleLabel();
+    });
+
+    window.addEventListener('load', () => {
+      document.getElementById('loader').classList.add('hidden');
+    });
+
+    const cursor = document.querySelector('.cursor');
+    const ring = document.querySelector('.cursor-ring');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2, ringX = mouseX, ringY = mouseY;
+    window.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+    const animateRing = () => {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      requestAnimationFrame(animateRing);
+    };
+    animateRing();
+    document.querySelectorAll('a, button, .project-card, .contact-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '54px'; ring.style.height = '54px'; ring.style.borderColor = 'rgba(79,216,230,.95)'; });
+      el.addEventListener('mouseleave', () => { ring.style.width = '34px'; ring.style.height = '34px'; ring.style.borderColor = 'rgba(134,255,215,.65)'; });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-fill').forEach(fill => fill.style.width = fill.dataset.width);
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('#skills .skill-card').forEach(card => skillObserver.observe(card));
+
+    const canvas = document.getElementById('network');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = () => window.innerWidth < 700 ? 44 : 84;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      initParticles();
+    }
+    function initParticles() {
+      particles = Array.from({ length: particleCount() }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        r: Math.random() * 2 + 1
+      }));
+    }
+    let pointer = { x: null, y: null };
+    window.addEventListener('mousemove', e => { pointer = { x: e.clientX, y: e.clientY }; });
+    window.addEventListener('mouseleave', () => { pointer = { x: null, y: null }; });
+    function drawNetwork() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(122, 227, 255, 0.7)';
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x, dy = p.y - q.y, dist = Math.hypot(dx, dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(79,216,230,${(1 - dist / 120) * 0.28})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+        if (pointer.x !== null) {
+          const pd = Math.hypot(p.x - pointer.x, p.y - pointer.y);
+          if (pd < 160) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(134,255,215,${(1 - pd / 160) * 0.35})`;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(pointer.x, pointer.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawNetwork);
+    }
+    resizeCanvas();
+    drawNetwork();
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>
